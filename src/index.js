@@ -5,7 +5,8 @@ const configViewEngine = require('./config/ViewEngine');
 const webRoute = require("./routers/web");
 
 const port = process.env.PORT;
-
+const db = require('./config/db');
+db.connect();
 configViewEngine(app);
 app.use("/",webRoute);
 

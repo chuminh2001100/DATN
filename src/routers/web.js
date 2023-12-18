@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const {getHome, getAcb, getSearch} = require('../controllers/homeController');
+const {getHome, getAcb, getSearch, getModel} = require('../controllers/homeController');
 
 // define the about route
 router.get('/about', (req, res) => {
@@ -13,4 +13,5 @@ router.get('/tin', getAcb);
 
 router.get('/search', getSearch);
 router.post('/search', getSearch);
+router.get('/model',getModel);
 module.exports = router;

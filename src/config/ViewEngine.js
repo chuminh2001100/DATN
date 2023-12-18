@@ -8,7 +8,9 @@ const configViewEngine = (app) => {
     app.set('view engine', 'handlebars');
     app.set('views',path.join("./src",'resource/view'));
     app.use(express.json());
-    app.use(express.urlencoded());
+    app.use(express.urlencoded({
+        extended: true
+    }));
     app.use(express.static(path.join('./src', 'public')));
 }
 
