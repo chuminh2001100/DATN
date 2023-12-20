@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const serverSelectionTimeoutMS = 5000;
+const mongoURI = process.env.MONGO_URI;
 async function connect(){
     try{
-        await mongoose.connect('mongodb://127.0.0.1:27017/minh_cv', {
+        await mongoose.connect(mongoURI, {
             serverSelectionTimeoutMS
         });
         console.log('Connect successfully!!!');
