@@ -13,5 +13,5 @@ router.get('/tin', getAcb);
 
 router.get('/search', getSearch);
 router.post('/search', getSearch);
-router.get('/model',getModel);
+// router.get('/model',getModel);
 module.exports = router;
