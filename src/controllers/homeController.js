@@ -1,4 +1,4 @@
-
+const VDT = require('../models/VDT');
 const Course = require('../models/Course');
 const {multipleMongooseToObject} = require('../utils/mongoose')
 
@@ -18,14 +18,15 @@ const getSearch = (req, res) =>{
 async function getModel(req, res){
     try {
         // Sử dụng await để đợi cho đến khi truy vấn hoàn tất
-        const result = await Course.find({});
+        const result = await VDT.find({});
         res.render('home',{
             course: multipleMongooseToObject(result)
         });
         // res.json(result);
-        // console.log(result);
+        console.log(`result: ${result}`);
     } catch (error) {
         // Xử lý lỗi nếu có
+        console.log("fail get model");
         console.error(error);
         res.status(400).json({error: error});
     }
