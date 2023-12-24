@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const V2 = new Schema({
-    image: {type: String, maxLength: 255},
+const wife = new Schema({
+    image: {type: String, maxLength: 1000},
     name: { type: String, maxLength: 255 },
     description: {type: String, maxLength: 600},
 },{
@@ -10,4 +10,4 @@ const V2 = new Schema({
 }
 );
 
-module.exports = mongoose.model('VDT', V2);
+module.exports = mongoose.model('wife', wife);
