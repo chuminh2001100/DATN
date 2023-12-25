@@ -7,4 +7,9 @@ const router = express.Router();
 router.get('/user/:id', (req, res) => {
     res.send(`User ID: ${req.params.id}`);
 });
+
+router.get('/referenceData', (req, res) => {
+    res.send('Khong di tu la may');
+});
+
 module.exports = router;
