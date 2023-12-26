@@ -15,6 +15,6 @@ router.post('/search', getSearch);
 router.get('/model',getModel);
 router.get('/createMode', getCreateMode);
 router.get('/thanhminh', getLove);
-router.post('/handleImage', getDataImage);
+router.post('/handleImage', getHandleImage);
 
 module.exports = router;
