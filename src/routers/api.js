@@ -1,15 +1,11 @@
 const express = require('express')
 const router = express.Router();
-// router.use('/app', (req, res) => {
-//     res.send("anh yeu em nhieu lam 569866");
-//     console.log('anh yeu em nhieu lam');
-// });
+const {getDataRef, setDataRef} = require('../controllers/CasterController');
 router.get('/user/:id', (req, res) => {
     res.send(`User ID: ${req.params.id}`);
 });
 
-router.get('/referenceData', (req, res) => {
-    res.send('Khong di tu la may');
-});
+router.post('/referenceData', setDataRef);
+router.get('/getDataRef', getDataRef);
 
 module.exports = router;
