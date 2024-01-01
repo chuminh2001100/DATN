@@ -1,7 +1,12 @@
-const handlebars = require('express-handlebars').create();
+const handlebars = require('express-handlebars').create({
+    helpers: {
+        sum: (a,b) => a + b,
+    }
+});
 const path = require('path');
 const morgan = require('morgan');
 const express = require('express');
+const methodOverride = require('method-override');
 const configViewEngine = (app) => {
     app.use(morgan('combined'))
     app.engine('handlebars', handlebars.engine);
@@ -12,6 +17,7 @@ const configViewEngine = (app) => {
         extended: true
     }));
     app.use(express.static(path.join('./src', 'public')));
+    app.use(methodOverride('_method'));
 }
 
 module.exports = configViewEngine;
