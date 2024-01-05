@@ -20,7 +20,9 @@ const setDataRef = async (req, res) =>{
     try{
         console.log(req.body);
         let check_1 = req.body;
+        console.log("Data raw: " + check_1);
         let buf = Buffer.from(check_1);
+        console.log("Data buffer: " + buf);
         const DataPosition = new dataPosition({data: buf});
         await DataPosition.save();
         res.send('Save in database successful');
