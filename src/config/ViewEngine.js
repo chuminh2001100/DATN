@@ -13,6 +13,7 @@ const configViewEngine = (app) => {
     app.set('view engine', 'handlebars');
     app.set('views',path.join("./src",'resource/view'));
     app.use(express.json());
+    app.use(express.raw());
     app.use(express.urlencoded({
         extended: true
     }));
