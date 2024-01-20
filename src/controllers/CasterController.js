@@ -11,10 +11,11 @@ async function getDataRef(req, res){
         const concatenatedBuffer = Buffer.concat(result.map(doc => doc.data));
         res.type('application/octet-stream');
         res.send(concatenatedBuffer);
+        console.log("Get data rtcm from database server successful");
         console.log(`result: ${result}`);
     } catch (error) {
         // Xử lý lỗi nếu có
-        console.log("fail get model");
+        console.log("fetch data from database fail of http get data rtcm");
         console.error(error);
         res.status(400).json({error: error});
     }
@@ -27,6 +28,7 @@ const setDataRef = async (req, res) =>{
         let buf = Buffer.from(check_1);
         const DataPosition = new dataPosition({data: buf});
         await DataPosition.save();
+        console.log("Save data rtcm in database successful");
         res.send('Save in database successful');
     }
     catch(error){
