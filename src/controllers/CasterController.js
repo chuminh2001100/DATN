@@ -4,7 +4,7 @@ const dataPosition = require('../models/dataPosition');
 async function getDataRef(req, res){
     try {
         // Sử dụng await để đợi cho đến khi truy vấn hoàn tất
-        let result = await dataPosition.find().sort({ createdAt: -1 }).limit(2);
+        let result = await dataPosition.find().sort({ createdAt: -1 }).limit(1);
         // let result_2 = result[0].data;
         // res.send(result_2);
         // res.send(result[1].data);
