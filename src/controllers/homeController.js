@@ -10,6 +10,10 @@ const getAcb = (req, res) =>{
     res.render('acb');
 }
 
+const getMap = (req, res) =>{
+    res.render('map');
+}
+
 const getSearch = (req, res) =>{
     console.log(req.body);
     res.render('search');
@@ -51,5 +55,5 @@ async function getModel(req, res){
 }
 
 module.exports = {
-    getHome, getAcb, getSearch, getModel, getCreateMode, getHandleImage
+    getHome, getAcb, getSearch, getModel, getCreateMode, getHandleImage, getMap
 }
