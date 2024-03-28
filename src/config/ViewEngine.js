@@ -7,8 +7,10 @@ const path = require('path');
 const morgan = require('morgan');
 const express = require('express');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser')
 const configViewEngine = (app) => {
     app.use(morgan('combined'))
+    app.use(cookieParser())
     app.engine('handlebars', handlebars.engine);
     app.set('view engine', 'handlebars');
     app.set('views',path.join("./src",'resource/view'));

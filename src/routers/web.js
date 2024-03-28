@@ -4,7 +4,14 @@ const {getHome, getAcb, getSearch, getModel, getCreateMode, getHandleImage} = re
 const {getLove, getDataImage} = require('../controllers/thanhController');
 // define the about route
 router.get('/about', (req, res) => {
+  console.log(req.cookies);
   res.send('About birds')
+})
+
+router.get('/cookie/:id', (req, res) => {
+  let data = `ChuVanMinh${req.params.id}`;
+  res.cookie('user-name',data);
+  res.send('Hello thanh minh');
 })
 
 router.get('/', getHome);
