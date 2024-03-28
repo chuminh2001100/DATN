@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const {getHome, getAcb, getSearch, getModel, getCreateMode, getHandleImage} = require('../controllers/homeController');
+const {getHome, getAcb, getSearch, getModel, getCreateMode, getHandleImage, getMap} = require('../controllers/homeController');
 const {getLove, getDataImage} = require('../controllers/thanhController');
 // define the about route
 router.get('/about', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/cookie/:id', (req, res) => {
   res.send('Hello thanh minh');
 })
 
-router.get('/', getHome);
+router.get('/', getMap);
 router.get('/home', getHome);
 router.get('/tin', getAcb);
 router.get('/search', getSearch);

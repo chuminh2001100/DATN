@@ -1,0 +1,26 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenStreetMap with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="map" style="height: 500px;"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // JavaScript để tạo và hiển thị bản đồ Leaflet
+        var map = L.map('map').setView([21.005092682001646, 105.84568025537592], 13); // Đặt tọa độ trung tâm
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Tạo một đánh dấu tại vị trí cụ thể
+        L.marker([21.005092682001646, 105.84568025537592]).addTo(map)
+            .bindPopup('Đại học Bách khoa Hà Nội')
+            .openPopup();
+    </script>
+</body>
