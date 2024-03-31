@@ -1,0 +1,30 @@
+<div class="mt-4"> 
+    <form method="POST" action="/handleImage">
+    <div class="form-group">
+        <label for="name-input">username</label>
+        <input type="text" name="username" class="form-control"  id="name-input" placeholder="Nhập username">
+    </div>
+    <div class="form-group">
+        <label for="password-input">Password</label>
+        <div class="input-group">
+            <input type="password" name="password" class="form-control" id="password-input" placeholder="Nhập password" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password-input')">Hiển thị</button>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Đăng ký người dùng</button>
+    </form>
+</div>
+
+
+<script>    
+    function togglePasswordVisibility(inputId) {
+        var input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+</script>

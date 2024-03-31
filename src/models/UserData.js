@@ -29,11 +29,7 @@ const userSchema = new Schema({
 		enum: ['admin', 'customer'],
 		default: 'customer',
 	},
-	fullName: {
-		type: String,
-		required: true,
-	},
-	phoneNumber: {
+	phonenumber: {
 		type: String,
 		required: false,
 		max: 15,

@@ -1,13 +1,63 @@
 <div class="mt-4"> 
-    <form method="POST" action="/handleImage">
+    <form method="POST" action="/auth/handleRegistryUser" onsubmit="return validatePassword()">
     <div class="form-group">
-        <label for="name-input">Name</label>
-        <input type="text" name="name" class="form-control"  id="name-input" placeholder="Nhập username">
+        <label for="name-input">username</label>
+        <input type="text" name="username" class="form-control"  id="name-input" placeholder="Nhập username">
     </div>
     <div class="form-group">
-        <label for="image-input"></label>
-        <input type="text" name="image" class="form-control"  id="image-input" placeholder="Nhập password">
+        <label for="password-input">Password</label>
+        <div class="input-group">
+            <input type="password" name="password" class="form-control" id="password-input" placeholder="Nhập password" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('password-input')">Hiển thị</button>
+            </div>
+        </div>
+        </div>
+    <div class="form-group">
+        <label for="again-password-input">Nhập lại Password</label>
+        <div class="input-group">
+            <input type="password" name="againPassword" class="form-control" id="again-password-input" placeholder="Nhập lại password" required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('again-password-input')">Hiển thị</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email-input">email</label>
+        <input type="text" name="email" class="form-control"  id="email-input" placeholder="Nhập email">
+    </div>
+    <div class="form-group">
+        <label for="numberphone-input">numberphone</label>
+        <input type="text" name="numberphone" class="form-control"  id="numberphone-input" placeholder="Nhập số điện thoại">
+    </div>
+    <div class="form-group">
+        <label for="address-input">address</label>
+        <input type="text" name="address" class="form-control"  id="address-input" placeholder="Nhập Địa chỉ">
     </div>
     <button type="submit" class="btn btn-primary">Đăng ký người dùng</button>
     </form>
 </div>
+
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password-input").value;
+        var againPassword = document.getElementById("again-password-input").value;
+        
+        if (password !== againPassword) {
+            alert("Mật khẩu không khớp. Vui lòng nhập lại.");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    function togglePasswordVisibility(inputId) {
+        var input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+</script>

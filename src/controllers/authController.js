@@ -1,5 +1,5 @@
-const user = require('../models/UserData');
-
+const userData = require('../models/UserData');
+const VDT = require('../models/VDT');
 async function authUser(req, res){
     try {
         console.log(`result: ${result}`);
@@ -11,4 +11,21 @@ async function authUser(req, res){
     }
 }
 
-module.exports = {authUser};
+function CreateUser(req, res){
+    res.render('registryUser');
+}
+
+const handleRegistryUser = async (req, res) =>{
+    try{
+        console.log(req.body);
+        const dataUser = new userData(req.body);
+        await dataUser.save();
+        res.redirect('../model');
+    }
+    catch(error){
+        console.log("fail registry user");
+        console.error(error);
+        res.status(400).json({error: error});
+    }
+}
+module.exports = {authUser, CreateUser, handleRegistryUser};
