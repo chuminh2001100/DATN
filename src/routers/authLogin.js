@@ -5,6 +5,7 @@ const { validate } = require('express-validation');
 const {authUser, CreateUser, handleRegistryUser} = require('../controllers/authController');
 
 router.post('/login', validate(loginValidation), (req, res) => {
+    console.log("Check login ok");
     res.send('Dữ liệu hợp lệ');
 });
 
