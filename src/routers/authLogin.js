@@ -10,6 +10,8 @@ router.post('/login', validate(loginValidation), (req, res) => {
     console.log("Mang lai gia tri");
     console.log("Nhanh moi day nay");
     console.log("Nhanh moi day nay 2333");
+    console.log("Check branch");
+    console.log("Phe loi mat");
     res.send('Dữ liệu hợp lệ');
 });
 
