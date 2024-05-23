@@ -18,6 +18,7 @@ router.post('/login', validate(loginValidation), (req, res) => {
 router.post('/test', (req, res) => {
     let check = req.body;
     console.log("ket qua nhu nao y nhi");
+    console.log("t muon conflict");
     console.log(check);
     res.send(check);
 });
