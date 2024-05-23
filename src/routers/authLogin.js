@@ -9,6 +9,7 @@ router.post('/login', validate(loginValidation), (req, res) => {
     console.log("student aboard");
     console.log("Mang lai gia tri");
     console.log("Nhanh moi day nay");
+    console.log("Nhanh moi day nay 2333");
     res.send('Dữ liệu hợp lệ');
 });
 
