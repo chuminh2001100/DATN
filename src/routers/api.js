@@ -3,6 +3,7 @@ const router = express.Router();
 const {getDataRef, setDataRef} = require('../controllers/CasterController');
 const {getMap} = require('../controllers/homeController');
 router.get('/user/:id', (req, res) => {
+    console.log("Hay lam");
     res.send(`User ID: ${req.params.id}`);
 });
 
