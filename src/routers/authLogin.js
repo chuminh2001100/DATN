@@ -7,6 +7,8 @@ const {authUser, CreateUser, handleRegistryUser} = require('../controllers/authC
 router.post('/login', validate(loginValidation), (req, res) => {
     console.log("Check login ok");
     console.log("student aboard");
+    console.log("Mang lai gia tri");
+    console.log("Nhanh moi day nay");
     res.send('Dữ liệu hợp lệ');
 });
 
