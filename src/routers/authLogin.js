@@ -1,19 +1,26 @@
 const express = require('express');
 const {loginValidation, registryUserValidation} = require('../validate/auth.validate');
 const router = express.Router();
+const {createJWT, authenticateToken} = require('../middleware/jwtaction');
 const { validate } = require('express-validation');
+const {getModel} = require('../controllers/homeController');
 const {authUser, CreateUser, handleRegistryUser} = require('../controllers/authController');
 
-router.post('/login', validate(loginValidation), (req, res) => {
-    console.log("Check login ok");
-    console.log("student aboard");
-    console.log("Mang lai gia tri");
-    console.log("Nhanh moi day nay");
-    console.log("Nhanh moi day nay 2333");
-    console.log("Check branch");
-    console.log("Phe loi mat");
-    res.send('Dữ liệu hợp lệ');
+router.post('/login', validate(loginValidation), createJWT, (req, res) => {
+    let result = {};
+    result.data = 'login success';
+    result.token = req.accessToken;
+    res.send(result);
 });
+
+router.get('/model', authenticateToken, (req, res) => {
+    let finalRes = {};
+    finalRes.user = req.user;
+    finalRes.infor = 'Access resoure successfully';
+    console.log(req.user);
+    res.send(finalRes);
+});
+
 
 router.post('/test', (req, res) => {
     let check = req.body;
