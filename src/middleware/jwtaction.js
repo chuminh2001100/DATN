@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+const { AUTH_TOKEN_MISSING_ERR, AUTH_HEADER_MISSING_ERR, JWT_DECODE_ERR, USER_NOT_FOUND_ERR } = require("../error/error");
 function createJWT(req, res, next){
     let accessToken;
     let body = req.body;
@@ -17,8 +18,13 @@ function createJWT(req, res, next){
 }
 
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization'];
-    if (!token) return res.sendStatus(403); // Forbidden if no token is provided
+    const header = req.headers['authorization'];
+    if (!header) return res.sendStatus(403).json({message: AUTH_HEADER_MISSING_ERR}); // Forbidden if no token is provided
+
+    const token = header.split("Bearer ")[1]
+    if (!token) {
+        return res.status(403).json({ message: AUTH_TOKEN_MISSING_ERR});
+    }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
@@ -29,8 +35,8 @@ function authenticateToken(req, res, next) {
             }
         }
         req.user = decoded; // Attach decoded token to the request
-        next(); // Proceed to the next middleware or route handler
     });
+    next(); // Proceed to the next middleware or route handler
 }
 
 module.exports = {
