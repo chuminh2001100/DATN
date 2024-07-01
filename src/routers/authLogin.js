@@ -32,6 +32,6 @@ router.post('/test', (req, res) => {
 });
 
 router.get('/registry',CreateUser);
-router.post('/handleRegistryUser', validate(registryUserValidation),handleRegistryUser);
+router.post('/handleRegistryUser', validate(registryUserValidation), handleRegistryUser);
 router.post('/verifyOTP', validate(verifyOTP), VerifyOTPUser);
 module.exports = router;

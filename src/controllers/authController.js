@@ -1,6 +1,6 @@
 const userData = require('../models/UserData');
 const VDT = require('../models/VDT');
-const {redis} = require('../config/db/redis');
+const redis = require('../config/db/redis');
 async function authUser(req, res){
     try {
         console.log(`result: ${result}`);
@@ -19,13 +19,15 @@ function CreateUser(req, res){
 const handleRegistryUser = async (req, res) =>{
     try{
         console.log(req.body);
+        console.log("IN here registry");
         let email = req.body.email;
-        const existingUser = await userData.findOne({email});
+        const existingUser = await userData.findOne({ email: email });
         if (existingUser) {
             if (existingUser.statusUser === 'active') {
                 return res.status(400).json({ message: 'Email already in use' });
             }
         }
+        console.log("find have ");
         const dataUser = new userData({ 
             ...req.body,
             statusUser: 'pending'});
@@ -35,7 +37,7 @@ const handleRegistryUser = async (req, res) =>{
             console.log(`Failed to create OTP`);
             res.status(500).json({ message: 'Server for User register fail'});
         }
-        res.status(201).json({ message: 'User registered, please verify OTP' });
+        res.status(201).json({ message: 'User registered, please verify OTP', otp: OTP});
         // res.redirect('../model');
     }
     catch(error){
@@ -52,11 +54,12 @@ const VerifyOTPUser = async (req, res) =>{
         otp = await getOTP(email);
         if (!otp) {
             console.log(`Failed to retrieve OTP for ${email}`);
-            res.status(400).json({ message: 'User register fail' });
+            res.status(400).json({ message: "Can not get OTP" });
+            return
         }
         optReq = req.body.otp;
         if(optReq ==  otp){
-            const existingUser = await userData.findOne({email});
+            const existingUser = await userData.findOne({email: email});
             if (existingUser) {
                 existingUser.statusUser = 'active';
                 await existingUser.save();
@@ -64,6 +67,7 @@ const VerifyOTPUser = async (req, res) =>{
             }
             else{
                 res.status(400).json({ message: 'User not found' });
+                return
             }
         }
         res.status(201).json({ message: 'User registered, verified OTP successfully' });
@@ -76,18 +80,18 @@ const VerifyOTPUser = async (req, res) =>{
     }
 }
 
+
 async function saveOTP(email, expiration = 300) {
     const otp = generateOTP();
     try {
-      await redis.set(`otp:${email}`, otp, 'EX', expiration);
-      console.log(`OTP for ${email}: ${otp}`);
-      return otp;
+        await redis.set(`otp:${email}`, otp, 'EX', expiration);
+        console.log(`OTP for ${email}: ${otp}`);
+        return otp;
     } catch (error) {
-      console.error('Error saving OTP:', error);
-      throw error;
+        console.error('Error saving OTP:', error);
+        return null;
     }
-  }
-  
+}
 
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -97,15 +101,15 @@ async function getOTP(email) {
     try {
         const otp = await redis.get(`otp:${email}`);
         if (otp) {
-        console.log(`OTP for ${email}: ${otp}`);
-        return otp;
+            console.log(`OTP for ${email}: ${otp}`);
+            return otp;
         } else {
-        console.log(`No OTP found for ${email}`);
-        return null;
+            console.log(`No OTP found for ${email}`);
+            return null;
         }
     } catch (error) {
         console.error('Error retrieving OTP:', error);
-        throw error;
+        return null;
     }
 }
 
