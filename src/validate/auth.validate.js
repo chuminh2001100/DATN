@@ -19,7 +19,15 @@ const registryUserValidation = {
 	})
 };
 
+const verifyOTP = {
+	body: Joi.object({
+		OTP: Joi.string().required(),
+		email: Joi.string().email().required(),
+	})
+};
+
 module.exports = { 
 	loginValidation,
-	registryUserValidation
+	registryUserValidation,
+	verifyOTP
 };

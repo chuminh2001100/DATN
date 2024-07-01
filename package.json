@@ -21,6 +21,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "express-validation": "^4.1.0",
+    "ioredis": "^5.4.1",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",

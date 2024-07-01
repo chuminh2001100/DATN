@@ -1,11 +1,11 @@
 const express = require('express');
-const {loginValidation, registryUserValidation} = require('../validate/auth.validate');
+const {loginValidation, registryUserValidation, verifyOTP} = require('../validate/auth.validate');
 const router = express.Router();
-const User = require("../models/user.model");
 const {createJWT, authenticateToken} = require('../middleware/jwtaction');
 const { validate } = require('express-validation');
 const {getModel} = require('../controllers/homeController');
-const {authUser, CreateUser, handleRegistryUser} = require('../controllers/authController');
+const {redis} = require('../config/db/redis');
+const {authUser, CreateUser, handleRegistryUser, VerifyOTPUser} = require('../controllers/authController');
 
 router.post('/login', validate(loginValidation), createJWT, (req, res) => {
     let result = {};
@@ -14,13 +14,9 @@ router.post('/login', validate(loginValidation), createJWT, (req, res) => {
     res.send(result);
 });
 
-router.get('/model', authenticateToken, async (req, res) => {
+router.get('/model', authenticateToken, (req, res) => {
     let finalRes = {};
     finalRes.user = req.user;
-    const user = await User.findById(req.user)
-    if (!user) {
-        return res.status(404).json({ message: USER_NOT_FOUND_ERR });
-    }
     finalRes.infor = 'Access resoure successfully';
     console.log(req.user);
     res.send(finalRes);
@@ -37,4 +33,5 @@ router.post('/test', (req, res) => {
 
 router.get('/registry',CreateUser);
 router.post('/handleRegistryUser', validate(registryUserValidation),handleRegistryUser);
+router.post('/verifyOTP', validate(verifyOTP), VerifyOTPUser);
 module.exports = router;

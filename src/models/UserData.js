@@ -53,6 +53,12 @@ const userSchema = new Schema({
 		type: Date,
 		default: moment().add(7, 'hours'),
 	},
+	statusUser: 
+	{ 
+		type: String, 
+		enum: ['pending', 'active'], 
+		default: 'pending',
+	},
 },{
     timestamps: true
 });
